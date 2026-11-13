@@ -1,0 +1,6 @@
+{
+  "name": "Wireless Text-to-Speech Audio Transmission over Wi-Fi",
+  "description": "Full-stack IoT smart college announcement system featuring AI speech synthesis, Wi-Fi audio dispatching to ESP32 receivers, Bluetooth PA amplifier integration, scheduled broadcasting, and EMF wireless wave analysis.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
