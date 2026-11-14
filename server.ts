@@ -12,9 +12,9 @@ app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
-// Tokens from environment or provided user request
-const WIT_AI_SERVER_TOKEN = process.env.WIT_AI_SERVER_TOKEN || '57MJGCHYSRRHQZMJZGDKEVZUDSZGJKSE';
-const WIT_AI_CLIENT_TOKEN = process.env.WIT_AI_CLIENT_TOKEN || 'IJPD3WFMD3SNBWKG2F2MDIGB6PFXIGY3';
+// Optional credentials are supplied through environment variables only.
+const WIT_AI_SERVER_TOKEN = process.env.WIT_AI_SERVER_TOKEN || '';
+const WIT_AI_CLIENT_TOKEN = process.env.WIT_AI_CLIENT_TOKEN || '';
 
 // In-Memory & Persistent State
 const audioCache = new Map<string, { buffer: Buffer; mimeType: string; duration: number }>();
@@ -382,6 +382,7 @@ function generateWavBuffer(text: string, tone: string, speedMultiplier = 1.0, pi
 // Wit.ai TTS API Integration with Intelligent Fallback
 // -------------------------------------------------------------
 async function synthesizeWithWitAi(text: string, voice: string): Promise<Buffer | null> {
+  if (!WIT_AI_SERVER_TOKEN) return null;
   try {
     const witVoice = voice.includes('colin') ? 'Colin' : voice.includes('antonio') ? 'Antonio' : 'Rebecca';
     
